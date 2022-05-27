@@ -1,7 +1,7 @@
 <!--
  * @Author: losting
  * @Date: 2022-04-01 17:16:54
- * @LastEditTime: 2022-05-27 15:28:46
+ * @LastEditTime: 2022-05-27 17:15:11
  * @LastEditors: losting
  * @Description: 
  * @FilePath: \ls\example\index.html
@@ -41,6 +41,7 @@
   </div>
   <script type="module">
     import ls from '../lib/ls.esm.js'
+    // window.ls = ls;
 
     function onSetStorage() {
       const key = document.getElementById('keyValue').value
@@ -65,6 +66,13 @@
 
     document.getElementById('confirm').addEventListener('click', onSetStorage)
     document.getElementById('getStorage').addEventListener('click', onGetStorage)
+
+    ls.set('login-info', {
+      username: 'admin',
+      password: '12345678',
+      isRememberMe: true,
+    });
+    console.log(ls.get('login-info'));
   </script>
 </body>
 </html>

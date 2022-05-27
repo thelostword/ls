@@ -1,7 +1,7 @@
 /*
  * @Author: losting
  * @Date: 2022-04-01 16:05:12
- * @LastEditTime: 2022-05-27 16:58:05
+ * @LastEditTime: 2022-05-27 17:25:41
  * @LastEditors: losting
  * @Description:
  * @FilePath: \ls\src\index.ts
@@ -43,7 +43,7 @@ export function get(key: string): Item['value'] {
     remove(`${PREFIX}${key}`);
     return undefined;
   }
-  return typeof item.value === 'string' ? JSON.parse(item.value) : item.value;
+  return item.value;
 }
 
 /**
