@@ -1,11 +1,21 @@
 <!--
  * @Author: losting
  * @Date: 2022-04-01 17:48:54
- * @LastEditTime: 2022-05-12 11:47:01
+ * @LastEditTime: 2022-05-27 15:45:18
  * @LastEditors: losting
  * @Description: 
- * @FilePath: \rollup-template\README.md
+ * @FilePath: \ls\README.md
 -->
-# rollup-template
-rollup 项目开发模板
-typescript、scss、eslint、eslint-config-airbnb
+# ls
+简单封装的带过期时间的 localStorage 方法
+
+### Usage
+``` JavaScript
+import ls from '@losting/ls';
+
+ls.set('name', 'admin');
+ls.set('token', 'iiuru3r-3qfa832-3238feaoi', 7 * 24 * 60 * 60 * 1000);
+ls.get('name');
+ls.remove('name');
+ls.clear();
+```
