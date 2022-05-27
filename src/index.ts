@@ -1,7 +1,7 @@
 /*
  * @Author: losting
  * @Date: 2022-04-01 16:05:12
- * @LastEditTime: 2022-05-27 16:10:43
+ * @LastEditTime: 2022-05-27 16:58:05
  * @LastEditors: losting
  * @Description:
  * @FilePath: \ls\src\index.ts
@@ -38,12 +38,12 @@ export function get(key: string): Item['value'] {
   if (!key) throw new Error('key is required');
   const itemStr = storage.getItem(`${PREFIX}${key}`);
   if (!itemStr) return undefined;
-  const item = JSON.parse(itemStr);
+  const item: Item = JSON.parse(itemStr);
   if (item.expires && item.expires < Date.now()) {
     remove(`${PREFIX}${key}`);
     return undefined;
   }
-  return item.value;
+  return typeof item.value === 'string' ? JSON.parse(item.value) : item.value;
 }
 
 /**
@@ -52,7 +52,7 @@ export function get(key: string): Item['value'] {
  * @param value localStorage value
  * @param expires localStorage expires
  */
-export function set(key: string, value: Item['value'], expires: number) {
+export function set(key: string, value: Item['value'], expires: Item['expires']) {
   if (!key) throw new Error('key is required');
   const item: Item = {
     value,
