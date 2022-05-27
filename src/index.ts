@@ -1,15 +1,53 @@
 /*
  * @Author: losting
  * @Date: 2022-04-01 16:05:12
- * @LastEditTime: 2022-05-12 11:57:47
+ * @LastEditTime: 2022-05-27 10:01:12
  * @LastEditors: losting
  * @Description:
- * @FilePath: \rollup-template\src\index.ts
+ * @FilePath: \ls\src\index.ts
  */
-import '@/styles/index.scss';
-// 加法函数
-export function add(...values: number[]): number {
-  return values.reduce((pre, cur) => pre + cur, 0);
+
+class Storage {
+  #storage: globalThis.Storage;
+  prefix: string;
+  constructor(storage: globalThis.Storage = globalThis.localStorage, prefix: string = '') {
+    this.#storage = storage;
+    this.prefix = prefix.length ? `${prefix}__` : '';
+  }
+
+  get(key: string): any {
+    if (!key) {
+      throw new Error('key is required');
+    }
+    const itemStr = this.#storage.getItem(`${this.prefix}${key}`);
+    if (!itemStr) {
+      return null;
+    }
+    const item = JSON.parse(itemStr);
+    if (item.expires && item.expires < Date.now()) {
+      this.remove(`${this.prefix}_${key}`);
+      return null;
+    }
+    return item.value;
+  }
+
+  set(key, value, expires) {
+    if (!key) {
+      throw new Error('key is required');
+    }
+    const item = {
+      value,
+      expires: expires ? Date.now() + expires : null,
+    };
+    this.#storage.setItem(`${this.prefix}_${key}`, JSON.stringify(item));
+  }
+
+  remove(key) {
+    if (!key) {
+      throw new Error('key is required');
+    }
+    this.#storage.removeItem(`${this.prefix}_${key}`);
+  }
 }
 
-export default add;
+export default new Storage();

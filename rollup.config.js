@@ -1,10 +1,10 @@
 /*
  * @Author: losting
  * @Date: 2022-04-01 16:04:32
- * @LastEditTime: 2022-05-12 11:56:13
+ * @LastEditTime: 2022-05-27 09:13:51
  * @LastEditors: losting
  * @Description:
- * @FilePath: \rollup-template\rollup.config.js
+ * @FilePath: \ls\rollup.config.js
  */
 
 import typescript from '@rollup/plugin-typescript';
@@ -15,9 +15,6 @@ import replace from '@rollup/plugin-replace';
 import alias from '@rollup/plugin-alias';
 import path from 'path';
 import { terser } from 'rollup-plugin-terser';
-import scss from 'rollup-plugin-scss';
-import postcss from 'postcss';
-import autoprefixer from 'autoprefixer';
 
 import pkg from './package.json';
 
@@ -35,13 +32,6 @@ export default {
       entries: [
         { find: '@', replacement: path.resolve(__dirname, './src') },
       ],
-    }),
-    scss({
-      output: 'lib/moe.min.css',
-      include: ['src/styles/*.scss'],
-      watch: 'src/styles/*.scss',
-      processor: () => postcss([autoprefixer()]),
-      outputStyle: 'compressed',
     }),
   ],
   output: [
