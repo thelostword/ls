@@ -2,14 +2,14 @@ declare type Item = {
     value: unknown;
     expires?: number;
 };
-export declare function clear(): void;
-export declare function remove(key: string): void;
-export declare function get(key: string): Item['value'];
-export declare function set(key: string, value: Item['value'], expires: Item['expires']): void;
+export declare const clear: () => void;
+export declare const remove: (key: string) => void;
+export declare const get: (key: string) => Item['value'];
+export declare const set: (key: string, value: Item['value'], expires: Item['expires']) => void;
 declare const _default: {
-    clear: typeof clear;
-    remove: typeof remove;
-    get: typeof get;
-    set: typeof set;
+    clear: () => void;
+    remove: (key: string) => void;
+    get: (key: string) => unknown;
+    set: (key: string, value: unknown, expires: number | undefined) => void;
 };
 export default _default;
