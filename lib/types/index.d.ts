@@ -1,10 +1,15 @@
-declare class Storage {
-    #private;
-    prefix: string;
-    constructor(storage?: globalThis.Storage, prefix?: string);
-    get(key: string): any;
-    set(key: any, value: any, expires: any): void;
-    remove(key: any): void;
-}
-declare const _default: Storage;
+declare type Item = {
+    value: unknown;
+    expires?: number;
+};
+export declare function clear(): void;
+export declare function remove(key: string): void;
+export declare function get(key: string): Item['value'];
+export declare function set(key: string, value: Item['value'], expires: number): void;
+declare const _default: {
+    clear: typeof clear;
+    remove: typeof remove;
+    get: typeof get;
+    set: typeof set;
+};
 export default _default;

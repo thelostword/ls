@@ -1,7 +1,7 @@
 <!--
  * @Author: losting
  * @Date: 2022-04-01 17:16:54
- * @LastEditTime: 2022-05-27 09:23:03
+ * @LastEditTime: 2022-05-27 15:28:46
  * @LastEditors: losting
  * @Description: 
  * @FilePath: \ls\example\index.html
@@ -15,7 +15,56 @@
   <title>ls</title>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="module" src="../lib/moe.esm.js"></script>
+  <div id="root">
+    <h2>设置localStorage</h2>
+    <div>
+      <label>Key:</label>
+      <input id="keyValue" />
+    </div>
+    <div>
+      <label>value:</label>
+      <input id="storageValue" />
+    </div>
+    <div>
+      <label>expires:</label>
+      <input id="storagExpires" />
+    </div>
+    <button id="confirm">设置</button>
+
+    <h2>获取localStorage</h2>
+    <div>
+      <label>key:</label>
+      <input id="getKey" />
+    </div>
+    <button id="getStorage">获取</button>
+
+  </div>
+  <script type="module">
+    import ls from '../lib/ls.esm.js'
+
+    function onSetStorage() {
+      const key = document.getElementById('keyValue').value
+      const value = document.getElementById('storageValue').value
+      const expires = document.getElementById('storagExpires').value
+      if (!key) {
+        alert('请输入key')
+        return
+      }
+      ls.set(key, value, expires)
+      alert('设置成功')
+    }
+
+    function onGetStorage() {
+      const key = document.getElementById('getKey').value
+      if (!key) {
+        alert('请输入key')
+        return
+      }
+      alert(ls.get(key))
+    }
+
+    document.getElementById('confirm').addEventListener('click', onSetStorage)
+    document.getElementById('getStorage').addEventListener('click', onGetStorage)
+  </script>
 </body>
 </html>
