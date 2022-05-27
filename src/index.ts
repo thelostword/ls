@@ -1,7 +1,7 @@
 /*
  * @Author: losting
  * @Date: 2022-04-01 16:05:12
- * @LastEditTime: 2022-05-27 15:11:10
+ * @LastEditTime: 2022-05-27 16:10:43
  * @LastEditors: losting
  * @Description:
  * @FilePath: \ls\src\index.ts
@@ -55,7 +55,7 @@ export function get(key: string): Item['value'] {
 export function set(key: string, value: Item['value'], expires: number) {
   if (!key) throw new Error('key is required');
   const item: Item = {
-    value: typeof value === 'object' ? JSON.stringify(value) : value,
+    value,
     expires: expires ? Date.now() + expires : 0,
   };
   storage.setItem(`${PREFIX}${key}`, JSON.stringify(item));

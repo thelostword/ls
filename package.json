@@ -1,6 +1,6 @@
 {
   "name": "@losting/ls",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "localStorage",
   "main": "lib/ls.cjs.js",
   "module": "lib/ls.esm.js",
