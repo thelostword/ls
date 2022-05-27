@@ -1,7 +1,7 @@
 {
   "name": "@losting/ls",
   "version": "0.0.1",
-  "description": "rollup template",
+  "description": "localStorage",
   "main": "lib/ls.cjs.js",
   "module": "lib/ls.esm.js",
   "types": "lib/types/index.d.ts",
