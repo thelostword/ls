@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@rollup/plugin-alias': ^3.1.9
   '@rollup/plugin-commonjs': ^22.0.0
+  '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^13.3.0
   '@rollup/plugin-replace': ^4.0.0
   '@rollup/plugin-typescript': ^8.3.2
@@ -13,7 +14,9 @@ specifiers:
   eslint-config-airbnb-typescript: ^17.0.0
   eslint-plugin-import: ^2.26.0
   jest: ^28.1.0
+  jsencrypt: ^3.2.1
   rollup: ^2.72.1
+  rollup-plugin-peer-deps-external: ^2.2.4
   rollup-plugin-scss: ^3.0.0
   rollup-plugin-sourcemaps: ^0.6.3
   rollup-plugin-terser: ^7.0.2
@@ -21,9 +24,13 @@ specifiers:
   tslib: ^2.4.0
   typescript: ^4.6.4
 
+dependencies:
+  jsencrypt: 3.2.1
+
 devDependencies:
   '@rollup/plugin-alias': 3.1.9_rollup@2.72.1
   '@rollup/plugin-commonjs': 22.0.0_rollup@2.72.1
+  '@rollup/plugin-json': 4.1.0_rollup@2.72.1
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.72.1
   '@rollup/plugin-replace': 4.0.0_rollup@2.72.1
   '@rollup/plugin-typescript': 8.3.2_dsrqihoegvzgycupzno43pt4sq
@@ -35,6 +42,7 @@ devDependencies:
   eslint-plugin-import: 2.26.0_doddzorl55y6dbr5ij3nshfl64
   jest: 28.1.0
   rollup: 2.72.1
+  rollup-plugin-peer-deps-external: 2.2.4_rollup@2.72.1
   rollup-plugin-scss: 3.0.0
   rollup-plugin-sourcemaps: 0.6.3_rollup@2.72.1
   rollup-plugin-terser: 7.0.2_rollup@2.72.1
@@ -689,6 +697,15 @@ packages:
       is-reference: 1.2.1
       magic-string: 0.25.9
       resolve: 1.22.0
+      rollup: 2.72.1
+    dev: true
+
+  /@rollup/plugin-json/4.1.0_rollup@2.72.1:
+    resolution: {integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==}
+    peerDependencies:
+      rollup: ^1.20.0 || ^2.0.0
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.72.1
       rollup: 2.72.1
     dev: true
 
@@ -2760,6 +2777,10 @@ packages:
       argparse: 2.0.1
     dev: true
 
+  /jsencrypt/3.2.1:
+    resolution: {integrity: sha512-k1sD5QV0KPn+D8uG9AdGzTQuamt82QZ3A3l6f7TRwMU6Oi2Vg0BsL+wZIQBONcraO1pc78ExMdvmBBJ8WhNYUA==}
+    dev: false
+
   /jsesc/2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==}
     engines: {node: '>=4'}
@@ -3212,6 +3233,14 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.0
+    dev: true
+
+  /rollup-plugin-peer-deps-external/2.2.4_rollup@2.72.1:
+    resolution: {integrity: sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==}
+    peerDependencies:
+      rollup: '*'
+    dependencies:
+      rollup: 2.72.1
     dev: true
 
   /rollup-plugin-scss/3.0.0:

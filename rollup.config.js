@@ -1,8 +1,8 @@
 /*
  * @Author: losting
  * @Date: 2022-04-01 16:04:32
- * @LastEditTime: 2022-05-27 15:11:47
- * @LastEditors: losting
+ * @LastEditTime: 2022-08-02 12:33:26
+ * @LastEditors: thelostword
  * @Description:
  * @FilePath: \ls\rollup.config.js
  */
@@ -14,6 +14,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import alias from '@rollup/plugin-alias';
 import path from 'path';
+import json from '@rollup/plugin-json';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
@@ -33,6 +35,8 @@ export default {
         { find: '@', replacement: path.resolve(__dirname, './src') },
       ],
     }),
+    json(),
+    peerDepsExternal(),
   ],
   output: [
     {

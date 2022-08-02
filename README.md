@@ -1,8 +1,8 @@
 <!--
  * @Author: losting
  * @Date: 2022-04-01 17:48:54
- * @LastEditTime: 2022-05-27 17:36:19
- * @LastEditors: losting
+ * @LastEditTime: 2022-08-02 12:39:48
+ * @LastEditors: thelostword
  * @Description: 
  * @FilePath: \ls\README.md
 -->
@@ -11,11 +11,16 @@
 
 ### Usage
 ``` JavaScript
-import ls, { get, set, remove, clear } from '@losting/ls';
+import { get, set, remove, clear } from '@losting/ls';
 
 ls.set('name', 'admin');
-ls.set('token', 'iiuru3r-3qfa832-3238feaoi', 7 * 24 * 60 * 60 * 1000);
+ls.set('password', '12345678', {
+  expires: 1000 * 60 * 60 * 24 * 7,
+  encrypt: true,
+  type: 'localStorage',
+});
 ls.get('name');
+ls.get('password', { type: 'localStorage' });
 ls.remove('name');
 ls.clear();
 ```

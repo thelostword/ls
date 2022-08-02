@@ -1,15 +1,16 @@
-declare type Item = {
-    value: unknown;
+declare type GetItemOptionsType = {
+    type: 'localStorage' | 'sessionStorage';
+};
+declare type SetItemOptionsType = GetItemOptionsType & {
     expires?: number;
+    encrypt?: boolean;
 };
-export declare const clear: () => void;
-export declare const remove: (key: string) => void;
-export declare const get: (key: string) => Item['value'];
-export declare const set: (key: string, value: Item['value'], expires: Item['expires']) => void;
-declare const _default: {
-    clear: () => void;
-    remove: (key: string) => void;
-    get: (key: string) => unknown;
-    set: (key: string, value: unknown, expires: number | undefined) => void;
+export declare const config: SetItemOptionsType & {
+    prefix: string;
 };
-export default _default;
+export declare const clear: ({ type }?: GetItemOptionsType) => void;
+export declare const remove: (key: string, { type }?: GetItemOptionsType) => void;
+export declare const get: (key: string, { type }?: GetItemOptionsType) => unknown;
+export declare const set: (key: string, value: unknown, { expires, encrypt, type }?: SetItemOptionsType) => void;
+export declare const isSupported: () => boolean;
+export {};
