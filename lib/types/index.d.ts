@@ -10,7 +10,10 @@ export declare const config: SetItemOptionsType & {
 };
 export declare const clear: ({ type }?: GetItemOptionsType) => void;
 export declare const remove: (key: string, { type }?: GetItemOptionsType) => void;
-export declare const get: (key: string, { type }?: GetItemOptionsType) => unknown;
+export declare const get: (key: string, { type, all, }: {
+    type?: "localStorage" | "sessionStorage" | undefined;
+    all: any;
+}) => unknown;
 export declare const set: (key: string, value: unknown, { expires, encrypt, type }?: SetItemOptionsType) => void;
 export declare const isSupported: () => boolean;
 export {};
