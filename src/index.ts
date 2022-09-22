@@ -1,7 +1,7 @@
 /*
  * @Author: losting
  * @Date: 2022-04-01 16:05:12
- * @LastEditTime: 2022-08-02 12:27:44
+ * @LastEditTime: 2022-09-22 18:44:50
  * @LastEditors: thelostword
  * @Description:
  * @FilePath: \ls\src\index.ts
@@ -91,7 +91,10 @@ export const remove = (
  */
 export const get = (
   key: string,
-  { type = config.type }: GetItemOptionsType = defaultGetStorageItem,
+  {
+    type = config.type,
+    all,
+  },
 ): unknown => {
   checkKey(key);
   const itemStr = (window || globalThis)[type].getItem(`${config.prefix}${key}`);
@@ -101,7 +104,8 @@ export const get = (
     remove(`${config.prefix}${key}`);
     return undefined;
   }
-  if (item.encrypt) return rsa.decrypt(item.value);
+  if (item.encrypt) item.value = rsa.decrypt(item.value);
+  if (all) return item;
   return item.value;
 };
 
