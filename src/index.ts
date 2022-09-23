@@ -1,7 +1,7 @@
 /*
  * @Author: losting
  * @Date: 2022-04-01 16:05:12
- * @LastEditTime: 2022-09-22 18:44:50
+ * @LastEditTime: 2022-09-23 10:58:40
  * @LastEditors: thelostword
  * @Description:
  * @FilePath: \ls\src\index.ts
@@ -30,25 +30,6 @@ export const config: SetItemOptionsType & { prefix: string } = {
   prefix: 'MOE__',
 };
 
-const defaultGetStorageItem: GetItemOptionsType = {
-  type: config.type,
-};
-const defaultSetStorageItem: SetItemOptionsType = {
-  type: config.type,
-  expires: config.expires,
-  encrypt: config.encrypt,
-};
-
-// localStorage key值校验
-const checkKey = (key: string) => {
-  if (typeof key !== 'string') {
-    throw new TypeError('key must be a string');
-  }
-  if (key.length === 0) {
-    throw new TypeError('key must not be empty');
-  }
-};
-
 const byteLength = (str) => {
   let count = 0;
   for (let i = 0; i < str.length; i += 1) {
@@ -67,20 +48,16 @@ const byteLength = (str) => {
 };
 
 // 清空localStorage
-export const clear = ({ type = config.type }: GetItemOptionsType = defaultGetStorageItem) => {
-  (window || globalThis)[type].clear();
+export const clear = (options?: GetItemOptionsType) => {
+  globalThis[options?.type || config.type].clear();
 };
 
 /**
  * 删除指定key的localStorage
  * @param key 要删除的localStorage的key值
  */
-export const remove = (
-  key: string,
-  { type = config.type }: GetItemOptionsType = defaultGetStorageItem,
-) => {
-  checkKey(key);
-  (window || globalThis)[type].removeItem(`${config.prefix}${key}`);
+export const remove = (key: string, options?: GetItemOptionsType) => {
+  globalThis[options?.type || config.type].removeItem(`${config.prefix}${key}`);
 };
 
 /**
@@ -89,15 +66,8 @@ export const remove = (
  * @param options 选项
  * @returns localStorage value
  */
-export const get = (
-  key: string,
-  {
-    type = config.type,
-    all,
-  },
-): unknown => {
-  checkKey(key);
-  const itemStr = (window || globalThis)[type].getItem(`${config.prefix}${key}`);
+export const get = (key: string, options?: GetItemOptionsType & { all: boolean }): unknown => {
+  const itemStr = globalThis[options?.type || config.type].getItem(`${config.prefix}${key}`);
   if (!itemStr) return undefined;
   const item: StorageItemType = JSON.parse(itemStr);
   if (item.expires && item.expires < Date.now()) {
@@ -105,7 +75,7 @@ export const get = (
     return undefined;
   }
   if (item.encrypt) item.value = rsa.decrypt(item.value);
-  if (all) return item;
+  if (options?.all) return item;
   return item.value;
 };
 
@@ -118,22 +88,20 @@ export const get = (
 export const set = (
   key: string,
   value: unknown,
-  { expires = config.expires, encrypt = config.encrypt, type = config.type }
-  : SetItemOptionsType = defaultSetStorageItem,
+  options?: SetItemOptionsType,
 ) => {
-  checkKey(key);
-  if (encrypt && typeof value === 'object') throw new TypeError('encrypt value not support object');
-  if (encrypt && byteLength(value) > 117) throw new TypeError('encrypt value too long');
+  if (options?.encrypt && typeof value === 'object') throw new TypeError('encrypt value not support object');
+  if (options?.encrypt && byteLength(value) > 117) throw new TypeError('encrypt value too long');
   const item = {
-    value: (encrypt && value) ? rsa.encrypt(value) : value,
-    expires: expires ? Date.now() + expires : 0,
-    encrypt,
+    value: (options?.encrypt && value) ? rsa.encrypt(value) : value,
+    expires: options?.expires ? Date.now() + options.expires : 0,
+    encrypt: options?.encrypt || config.encrypt,
   };
-  (window || globalThis)[type].setItem(`${config.prefix}${key}`, JSON.stringify(item));
+  globalThis[options?.type || config.type].setItem(`${config.prefix}${key}`, JSON.stringify(item));
 };
 
 // 判断当前环境是否支持localStorge
 export const isSupported = () => {
-  if ('localStorage' in (window || globalThis)) return true;
+  if ('localStorage' in globalThis) return true;
   return false;
 };
