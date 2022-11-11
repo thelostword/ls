@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>example</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jsencrypt/3.3.0/jsencrypt.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>设置localStorage</h2>
+    <div>
+      <label>Key:</label>
+      <input id="setKey" placeholder="请输入KEY" />
+    </div>
+    <div>
+      <label>value:</label>
+      <input id="setValue" placeholder="请输入VALUE" />
+    </div>
+    <div>
+      <label>expires:</label>
+      <input id="setExpires" placeholder="请输入过期时间" />
+    </div>
+    <div>
+      <label>optional:</label>
+      <div>
+        <input id="setIsEncry" type="checkbox" placeholder="Please enter the key" />
+        <label for="setIsEncry">加密</label>
+      </div>
+    </div>
+    <button id="setConfirm">确认</button>
+
+    <h2>获取localStorage</h2>
+    <div>
+      <label>key:</label>
+      <input id="getKey" placeholder="请输入KEY" />
+    </div>
+    <div>
+      <label>Value:</label>
+      <textarea id="getValue" readonly placeholder="结果"></textarea>
+    </div>
+    <div>
+      <label>optional:</label>
+      <div>
+        <input id="getOptionalAll" type="checkbox" placeholder="Please enter the key" />
+        <label for="getOptionalAll">返回全部数据</label>
+      </div>
+    </div>
+    <button id="getConfirm">获取</button>
+  </div>
+  <script type="module" src="/example/main.ts"></script>
+</body>
+</html>

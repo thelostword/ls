@@ -2,8 +2,8 @@
  * @Author: thelostword
  * @Date: 2022-08-02 10:04:27
  * @LastEditors: thelostword
- * @LastEditTime: 2022-08-02 11:39:39
- * @FilePath: \ls\src\rsa.ts
+ * @LastEditTime: 2022-11-11 15:09:13
+ * @FilePath: \ls\src\lib\rsa.ts
  */
 import JSEncrypt from 'jsencrypt';
 
@@ -28,14 +28,14 @@ const privateKey = 'MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALwg0AlJeKFS
 + 'YYrikpNJWmQJ10M=';
 
 // rsa加密
-export const encrypt = (data) => {
+export const encrypt = (data: string) => {
   const jsEncrypt = new JSEncrypt();
   jsEncrypt.setPublicKey(publicKey);
   return jsEncrypt.encrypt(data);
 };
 
 // rsa解密
-export const decrypt = (data) => {
+export const decrypt = (data: string) => {
   const jsEncrypt = new JSEncrypt();
   jsEncrypt.setPrivateKey(privateKey);
   return jsEncrypt.decrypt(data);

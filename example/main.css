@@ -1,0 +1,28 @@
+#app > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+#app > div > label {
+  display: inline-block;
+  width: 80px;
+}
+#app > div > input {
+  width: 300px;
+  height: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+#app > div > textarea {
+  width: 300px;
+  height: 80px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+#app > button {
+  width: 300px;
+  height: 30px;
+  margin-left: 85px;
+}

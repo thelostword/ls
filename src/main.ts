@@ -1,12 +1,14 @@
 /*
- * @Author: losting
- * @Date: 2022-04-01 16:05:12
- * @LastEditTime: 2022-09-23 10:58:40
+ * @Author: thelostword
+ * @Date: 2022-11-11 17:35:26
  * @LastEditors: thelostword
- * @Description:
- * @FilePath: \ls\src\index.ts
+ * @LastEditTime: 2022-11-11 18:34:35
+ * @FilePath: \ls\src\main.ts
  */
 import * as rsa from './rsa';
+
+type StorageType = 'localStorage' | 'sessionStorage' | undefined;
+
 
 type StorageItemType = {
   value: unknown,
@@ -30,7 +32,7 @@ export const config: SetItemOptionsType & { prefix: string } = {
   prefix: 'MOE__',
 };
 
-const byteLength = (str) => {
+const byteLength = (str: string) => {
   let count = 0;
   for (let i = 0; i < str.length; i += 1) {
     const charCode = str.charCodeAt(i);
@@ -48,8 +50,8 @@ const byteLength = (str) => {
 };
 
 // 清空localStorage
-export const clear = (options?: GetItemOptionsType) => {
-  globalThis[options?.type || config.type].clear();
+export const clear = (type?: StorageType) => {
+  globalThis[type || config.type].clear();
 };
 
 /**
@@ -74,7 +76,7 @@ export const get = (key: string, options?: GetItemOptionsType & { all: boolean }
     remove(`${config.prefix}${key}`);
     return undefined;
   }
-  if (item.encrypt) item.value = rsa.decrypt(item.value);
+  if (item.encrypt && item.value === 'string') item.value = rsa.decrypt(item.value);
   if (options?.all) return item;
   return item.value;
 };
@@ -87,7 +89,7 @@ export const get = (key: string, options?: GetItemOptionsType & { all: boolean }
  */
 export const set = (
   key: string,
-  value: unknown,
+  value: string,
   options?: SetItemOptionsType,
 ) => {
   if (options?.encrypt && typeof value === 'object') throw new TypeError('encrypt value not support object');
@@ -98,10 +100,4 @@ export const set = (
     encrypt: options?.encrypt || config.encrypt,
   };
   globalThis[options?.type || config.type].setItem(`${config.prefix}${key}`, JSON.stringify(item));
-};
-
-// 判断当前环境是否支持localStorge
-export const isSupported = () => {
-  if ('localStorage' in globalThis) return true;
-  return false;
 };
