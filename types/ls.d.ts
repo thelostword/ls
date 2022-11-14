@@ -2,12 +2,10 @@
  * @Author: thelostword
  * @Date: 2022-11-11 17:25:00
  * @LastEditors: thelostword
- * @LastEditTime: 2022-11-14 15:24:21
+ * @LastEditTime: 2022-11-14 16:29:44
  * @FilePath: \ls\types\ls.d.ts
  */
-declare type StorageType = {
-  type: 'localStorage' | 'sessionStorage';
-};
+declare type StorageType = 'localStorage' | 'sessionStorage';
 declare type GetStorageItemOption = {
   type?: StorageType;
   isRaw?: boolean;
