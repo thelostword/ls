@@ -2,7 +2,7 @@
  * @Author: thelostword
  * @Date: 2022-09-22 18:31:24
  * @LastEditors: thelostword
- * @LastEditTime: 2022-11-14 15:22:06
+ * @LastEditTime: 2022-11-14 15:55:24
  * @FilePath: \ls\example\main.ts
  */
 import './main.css';

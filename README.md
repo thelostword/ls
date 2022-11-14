@@ -1,7 +1,7 @@
 <!--
  * @Author: losting
  * @Date: 2022-04-01 17:48:54
- * @LastEditTime: 2022-11-14 14:47:02
+ * @LastEditTime: 2022-11-14 15:54:47
  * @LastEditors: thelostword
  * @Description: 
  * @FilePath: \ls\README.md
@@ -31,6 +31,7 @@ ls.set('password', '12345678', {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>example</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="./dist/ls.umd.js"></script>
   <!-- or
   <script src="./dist/ls.iife.js"></script> -->

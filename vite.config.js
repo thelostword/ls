@@ -2,7 +2,7 @@
  * @Author: thelostword
  * @Date: 2022-11-11 14:51:58
  * @LastEditors: thelostword
- * @LastEditTime: 2022-11-14 11:56:50
+ * @LastEditTime: 2022-11-14 15:50:03
  * @FilePath: \ls\vite.config.js
  */
 import { fileURLToPath, URL } from 'node:url';
@@ -31,7 +31,7 @@ export default () => defineConfig({
       external: ['crypto-js'],
       output: {
         globals: {
-          'crypto-js': '$cryptoJs'
+          'crypto-js': 'CryptoJS'
         }
       }
     }
