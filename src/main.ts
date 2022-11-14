@@ -2,7 +2,7 @@
  * @Author: thelostword
  * @Date: 2022-11-11 17:35:26
  * @LastEditors: thelostword
- * @LastEditTime: 2022-11-14 15:23:29
+ * @LastEditTime: 2022-11-14 15:33:06
  * @FilePath: \ls\src\main.ts
  */
 import * as crypto from './crypto';
@@ -94,7 +94,7 @@ export const get = (key: string, option?: GetStorageItemOption): unknown => {
 export const set = (key: string, value: unknown, option?: SetStorageItemOption) => {
   let itemValue;
   let itemOption;
-  if (typeof value === 'string') {
+  if (typeof value !== 'object') {
     itemValue = value;
     itemOption = option;
   } else {
