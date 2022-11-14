@@ -1,6 +1,6 @@
 {
   "name": "@losting/ls",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "localStorage",
   "type": "module",
   "main": "./dist/ls.iife.js",
