@@ -1,12 +1,16 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/crypto-js': ^4.1.1
+  crypto-js: ^4.1.1
   jsencrypt: ^3.3.1
   typescript: ^4.8.4
   vite: ^3.2.3
   vitest: ^0.25.1
 
 devDependencies:
+  '@types/crypto-js': 4.1.1
+  crypto-js: 4.1.1
   jsencrypt: 3.3.1
   typescript: 4.8.4
   vite: 3.2.3
@@ -40,6 +44,10 @@ packages:
 
   /@types/chai/4.3.4:
     resolution: {integrity: sha512-KnRanxnpfpjUTqTCXslZSEdLfXExwgNxYPdiO2WGUj8+HDjFi8R3k5RVKPeSCzLjCcshCAtVO2QBbVuAV4kTnw==}
+    dev: true
+
+  /@types/crypto-js/4.1.1:
+    resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
     dev: true
 
   /@types/node/18.11.9:
@@ -76,6 +84,10 @@ packages:
 
   /check-error/1.0.2:
     resolution: {integrity: sha512-BrgHpW9NURQgzoNyjfq0Wu6VFO6D7IZEmJNdtgNqpzGG8RuNFHt2jQxWlAs4HMe119chBnv+34syEZtc6IhLtA==}
+    dev: true
+
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
     dev: true
 
   /debug/4.3.4:

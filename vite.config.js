@@ -2,7 +2,7 @@
  * @Author: thelostword
  * @Date: 2022-11-11 14:51:58
  * @LastEditors: thelostword
- * @LastEditTime: 2022-11-11 18:17:27
+ * @LastEditTime: 2022-11-14 11:56:50
  * @FilePath: \ls\vite.config.js
  */
 import { fileURLToPath, URL } from 'node:url';
@@ -28,10 +28,10 @@ export default () => defineConfig({
       fileName: (format) => `ls.${format}.js`
     },
     rollupOptions: {
-      external: ['jsencrypt'],
+      external: ['crypto-js'],
       output: {
         globals: {
-          jsencrypt: 'JSEncrypt'
+          'crypto-js': '$cryptoJs'
         }
       }
     }

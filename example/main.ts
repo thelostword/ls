@@ -2,11 +2,16 @@
  * @Author: thelostword
  * @Date: 2022-09-22 18:31:24
  * @LastEditors: thelostword
- * @LastEditTime: 2022-11-11 17:38:39
+ * @LastEditTime: 2022-11-14 15:22:06
  * @FilePath: \ls\example\main.ts
  */
 import './main.css';
 import * as ls from "../src/main";
+
+ls.customConfig({
+  prefix: 'EXAMPLE_',
+  secret: '01221ecd'
+});
 
 function setupOnSet() {
   const setKey = document.querySelector<HTMLInputElement>('#setKey');
@@ -27,7 +32,6 @@ function setupOnSet() {
       return;
     }
     ls.set(key, value, {
-      type: 'localStorage',
       encrypt: !!setIsEncry!.checked,
       expires: setExpires?.value ? Number(setExpires?.value) : 0,
     })
@@ -48,7 +52,7 @@ function setupOnGet() {
     }
     const value = JSON.stringify(ls.get(key, {
       type: 'localStorage',
-      all: !!getOptionalAll?.checked,
+      isRaw: !!getOptionalAll?.checked,
     }));
     getValue!.value = value;
   })
