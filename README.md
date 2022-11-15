@@ -1,7 +1,7 @@
 <!--
  * @Author: losting
  * @Date: 2022-04-01 17:48:54
- * @LastEditTime: 2022-11-15 09:26:17
+ * @LastEditTime: 2022-11-15 12:48:30
  * @LastEditors: thelostword
  * @Description: 
  * @FilePath: \ls\README.md
@@ -31,16 +31,16 @@ ls.set('password', '12345678', {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>example</title>
-  <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="./dist/ls.umd.js"></script>
+  <script src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"></script>
+  <script src="https://unpkg.com/@losting/ls@2.0.1/dist/ls.iife.js"></script>
   <!-- or
-  <script src="./dist/ls.iife.js"></script> -->
+  <script src="https://unpkg.com/@losting/ls@2.0.1/dist/ls.umd.js"></script> -->
 </head>
 <body>
   <div id="app"></div>
   <script>
     $ls.set('key', 'value');
-    ...
+    // ...
   </script>
 </body>
 </html>
