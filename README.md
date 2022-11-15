@@ -1,7 +1,7 @@
 <!--
  * @Author: losting
  * @Date: 2022-04-01 17:48:54
- * @LastEditTime: 2022-11-14 15:54:47
+ * @LastEditTime: 2022-11-15 09:26:17
  * @LastEditors: thelostword
  * @Description: 
  * @FilePath: \ls\README.md
@@ -106,6 +106,14 @@ const getStoreData = () => {
 import { remove } from '@losting/ls';
 
 remove('key');
+
+// 指定类型
+remove('key', 'localStorage');
+// or
+remove('key', {
+  type: 'localStorage',
+});
+
 ```
 
 ### clear
@@ -113,4 +121,6 @@ remove('key');
 import { clear } from '@losting/ls';
 
 clear();
+// 指定类型
+clear('localStorage');
 ```
