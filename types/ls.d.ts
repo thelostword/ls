@@ -1,27 +1,14 @@
-/*
- * @Author: thelostword
- * @Date: 2022-11-11 17:25:00
- * @LastEditors: thelostword
- * @LastEditTime: 2022-11-15 12:49:01
- * @FilePath: \ls\types\ls.d.ts
- */
-declare type StorageType = 'localStorage' | 'sessionStorage';
-declare type GetStorageItemOption = {
-  type?: StorageType;
-  isRaw?: boolean;
-};
-declare type SetStorageItemOption = {
-  type?: StorageType;
-  value?: unknown;
+
+declare type Option = {
   expires?: number;
   encrypt?: boolean;
 }
-declare type Config = {
-  prefix?: string;
-  secret?: string;
-}
-export declare const customConfig: (option: Config) => void;
-export declare const clear: (type?: StorageType) => void;
-export declare const remove: (key: string, option?: StorageType | { type: StorageType }) => void;
-export declare const get: (key: string, option?: GetStorageItemOption) => unknown;
-export declare const set: (key: string, value: unknown, option?: SetStorageItemOption) => void;
+
+export declare const encrypt: (str: string) => string;
+export declare const decrypt: (str: string) => string;
+
+export declare const set: (key: string, value: unknown, option?: Option) => void;
+export declare const get: (key: string, isRaw?: boolean) => unknown;
+export declare const remove: (key: string) => void;
+export declare const clear: () => void;
+export declare const setPrefix: (prefix: string) => void;

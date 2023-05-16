@@ -1,51 +1,76 @@
-import a from "crypto-js";
-const g = "_losting_ls_secret_key_";
-let o = globalThis[g] || "sX0pB2LJ171dOfzu";
-const y = (e) => {
-  o = e, globalThis[g] = e;
-}, S = (e) => a.AES.encrypt(e, o).toString(), n = (e) => a.AES.decrypt(e, o).toString(a.enc.Utf8);
-let s = globalThis.localStorage.getItem("LS_PREFIX") || "MOE__";
-const T = ({ prefix: e, secret: t }) => {
-  e && (s = e, globalThis.localStorage.setItem("LS_PREFIX", e)), t && y(t);
-}, E = (e) => {
-  globalThis[e || "localStorage"].clear();
-}, u = (e, t) => {
-  if (t) {
-    if (typeof t == "string") {
-      globalThis[t].removeItem(`${s}${e}`);
-      return;
-    }
-    if (typeof t == "object") {
-      globalThis[t.type].removeItem(`${s}${e}`);
-      return;
-    }
-  }
-  globalThis.localStorage.removeItem(`${s}${e}`);
-}, $ = (e, t) => {
-  const c = globalThis[(t == null ? void 0 : t.type) || "localStorage"].getItem(`${s}${e}`);
-  if (!c)
+const l = (r) => {
+  if (typeof r != "string" || !r)
+    throw new TypeError("Input must be a string and cannot be empty!");
+  const n = Math.floor(Math.random() * 256), t = r.length, e = new Uint16Array(t + 1);
+  for (let a = 0; a <= t; a++)
+    e[a] = r.charCodeAt(a) ^ n;
+  e[t] = n;
+  const o = new Uint8Array(e.buffer), s = String.fromCharCode(...o);
+  return btoa(s);
+}, f = (r) => {
+  if (typeof r != "string" || !r)
+    throw new TypeError("Input must be a string and cannot be empty!");
+  const n = atob(r), t = new Uint8Array(n.length);
+  for (let a = 0; a < t.length; a++)
+    t[a] = n.charCodeAt(a);
+  const e = new Uint16Array(t.buffer), o = e.length - 1, s = new Array(o);
+  for (let a = 0; a < o; a++)
+    s[a] = String.fromCharCode(e[a] ^ e[o]);
+  return s.join("");
+};
+let c = localStorage.getItem("__LS_PREFIX__") || "MOE_";
+const g = () => void localStorage.clear(), i = (r) => void localStorage.removeItem(`${c}${r}`), u = (r, n = !1) => {
+  const t = localStorage.getItem(`${c}${r}`);
+  if (!t)
     return;
-  const l = JSON.parse(c);
-  if (l.expires && l.expires <= Date.now()) {
-    u(`${s}${e}`);
+  const e = JSON.parse(t);
+  if (e.expires && e.expires <= Date.now()) {
+    i(`${c}${r}`);
     return;
   }
-  return l.encrypt && typeof l.value == "string" && (l.value = n(l.value)), t != null && t.isRaw ? l : l.value;
-}, h = (e, t, c) => {
-  let l, r;
-  if (typeof t != "object" ? (l = t, r = c) : (l = t.value, r = t), (r == null ? void 0 : r.encrypt) && typeof l == "object")
-    throw new TypeError("encrypt value not support object");
-  const f = {
-    value: (r == null ? void 0 : r.encrypt) && l ? S(l) : t,
-    expires: r != null && r.expires ? Date.now() + r.expires : void 0,
-    encrypt: r == null ? void 0 : r.encrypt
+  return e.encrypt && (e.value === "" || e.value === null || e.value === void 0 || typeof e.value == "string" && (e.value = f(e.value)), e.__isJson && (e.value = JSON.parse(f(e.value)))), n ? e : e.value;
+}, d = (r, n, t) => {
+  if (!r)
+    throw new Error("缺少必要参数!");
+  let e;
+  const s = {
+    value: (() => {
+      if (n === "" || n === null || n === void 0)
+        return n;
+      if (t != null && t.encrypt) {
+        if (typeof n == "string")
+          return l(n);
+        if (typeof n == "object")
+          return e = !0, l(JSON.stringify(n));
+      }
+      return n;
+    })(),
+    expires: t != null && t.expires ? Date.now() + t.expires : 0,
+    encrypt: t == null ? void 0 : t.encrypt,
+    __isJson: e
   };
-  globalThis[(r == null ? void 0 : r.type) || "localStorage"].setItem(`${s}${e}`, JSON.stringify(f));
+  localStorage.setItem(`${c}${r}`, JSON.stringify(s));
+}, y = (r) => {
+  if (r === c)
+    return;
+  const n = [];
+  for (let t = 0; t < localStorage.length; t++) {
+    const e = localStorage.key(t), o = localStorage.getItem(e);
+    if (e.startsWith(c)) {
+      const s = e.replace(new RegExp(`^${c}`), r);
+      localStorage.setItem(s, o), n.push(e);
+    }
+  }
+  c = r, localStorage.setItem("__LS_PREFIX__", r), n.forEach((t) => {
+    localStorage.removeItem(t);
+  });
 };
 export {
-  E as clear,
-  T as customConfig,
-  $ as get,
-  u as remove,
-  h as set
+  g as clear,
+  f as decrypt,
+  l as encrypt,
+  u as get,
+  i as remove,
+  d as set,
+  y as setPrefix
 };
