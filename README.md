@@ -1,5 +1,5 @@
 # ls
-易用的localStorage
+Easy localStorage
 
 ## Usage
 ```sh
@@ -11,18 +11,15 @@ npm install @losting/ls
 ``` JavaScript
 import * as ls from '@losting/ls';
 
-// 直接设置
 set('name', 'admin');
 
-...
-// json对象格式
-const data = {
+// json data
+set('data', {
   name: '张三',
   password: '12345678',
-}
-set('data', data);
+});
 
-// 设置过期时间和简单加密
+// Set expiration time and enable simple encryption.
 set('password', '12345678', {
   expires: 1000 * 60 * 60 * 24 * 7,
   encrypt: true,
@@ -52,7 +49,7 @@ set('password', '12345678', {
 ```
 
 
-### 设置key前缀
+### setPrefix
 ``` JavaScript
 import { setPrefix } from '@losting/ls';
 
@@ -65,12 +62,12 @@ setPrefix('__EXAMPLE_');
 ``` JavaScript
 import { set } from '@losting/ls';
 
-// set(key: string, value: any, option?: { expires?: number, encrypt?: boolean })
+// set(key: string, value: unknown, option?: { expires?: number, encrypt?: boolean })
 set('key', 'value');
 // or
 set('key', 'value', {
-  expires: 0, // 过期时间， 0或undefined表示不过期。3000表示3秒后过期
-  encrypt: false, // 是否加密
+  expires: 0, // 0 or undefined mean never expire. 3000 means expire after 3 seconds
+  encrypt: false, // Whether to encrypt
 });
 
 ```
@@ -79,17 +76,16 @@ set('key', 'value', {
 ``` JavaScript
 import { get } from '@losting/ls';
 
-// get(key: string, isRaw: boolean)
 const value = get('key');
 
-// 过期前5分钟做些事情
-const getStoreData = () => {
-  const store = get('store', true);
-  if (store.expires - Date.now() <= 1000 * 60 * 5) {
+// use callback
+const value = get('token', ({value, expires}) => {
+  if (expires - Date.now() <= 1000 * 60 * 5) {
     // do something
+    // return custom value
   }
-  return store.value;
-}
+  return value;
+});
 
 ```
 

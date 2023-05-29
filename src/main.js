@@ -12,16 +12,16 @@ export const clear = () => void localStorage.clear();
  */
 export const remove = (key) => {
   if (!key) throw new Error('Missing key!');
-  localStorage.removeItem(`${PREFIX}${key}`)
+  localStorage.removeItem(`${PREFIX}${key}`);
 };
 
 /**
  * 获取localStorage
  * @param { string } key 要查询的localStorage的key值
- * @param { boolean } isRaw 处理前的数据
+ * @param { Function } callback 
  * @returns localStorage value
  */
-export const get = (key, isRaw = false) => {
+export const get = (key, callback) => {
   if (!key) throw new Error('Missing key!');
   const dataStr = localStorage.getItem(`${PREFIX}${key}`);
   if (!dataStr) return undefined;
@@ -35,7 +35,7 @@ export const get = (key, isRaw = false) => {
     else if (typeof data.value === 'string') data.value = decrypt(data.value);
     if (data.__isJson) data.value = JSON.parse(decrypt(data.value));
   }
-  if (isRaw) return data;
+  if (typeof callback === 'function') return callback(data);
   return data.value;
 };
 

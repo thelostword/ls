@@ -11,8 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "release": "release-it",
-    "prepublishOnly": "pnpm run build"
+    "release": "release-it"
   },
   "files": [
     "LICENSE",

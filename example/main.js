@@ -31,7 +31,6 @@ function setupOnSet() {
 function setupOnGet() {
   const getKey = document.querySelector('#getKey');
   const getValue = document.querySelector('#getValue');
-  const getOptionalAll = document.querySelector('#getOptionalAll');
   const getConfirm = document.querySelector('#getConfirm');
 
   getConfirm?.addEventListener('click', () => {
@@ -40,7 +39,7 @@ function setupOnGet() {
       alert('请输入KEY');
       return;
     }
-    const value = JSON.stringify(get(key, !!getOptionalAll?.checked));
+    const value = JSON.stringify(get(key));
     getValue.value = value;
   })
 }

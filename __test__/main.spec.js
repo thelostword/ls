@@ -73,9 +73,6 @@ describe('localStorage utility functions', () => {
     
       const retrievedValue = get(key);
       expect(retrievedValue).toEqual(value);
-
-      const rawValue = get(key, true);
-      expect(rawValue).toEqual({ value, expires: 0 });
     });
 
     it('should handle empty values correctly', () => {
@@ -90,6 +87,18 @@ describe('localStorage utility functions', () => {
       set(nullKey, nullValue);
       const retrievedNullValue = get(nullKey);
       expect(retrievedNullValue).toBe(nullValue);
+    });
+
+    it('should get custom value by callback', () => {
+      const key = 'testKey';
+      const value = 'testValue';
+      set(key, value);
+
+      const _value = 'custom Value'
+      const customValue = get(key, ({value, expires}) => {
+        return _value;
+      });
+      expect(customValue).toEqual(_value);
     });
   });
 });

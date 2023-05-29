@@ -23,7 +23,7 @@ const g = () => void localStorage.clear(), i = (r) => {
   if (!r)
     throw new Error("Missing key!");
   localStorage.removeItem(`${c}${r}`);
-}, u = (r, n = !1) => {
+}, u = (r, n) => {
   if (!r)
     throw new Error("Missing key!");
   const t = localStorage.getItem(`${c}${r}`);
@@ -34,8 +34,8 @@ const g = () => void localStorage.clear(), i = (r) => {
     i(`${c}${r}`);
     return;
   }
-  return e.encrypt && (e.value === "" || e.value === null || e.value === void 0 || typeof e.value == "string" && (e.value = f(e.value)), e.__isJson && (e.value = JSON.parse(f(e.value)))), n ? e : e.value;
-}, d = (r, n, t) => {
+  return e.encrypt && (e.value === "" || e.value === null || e.value === void 0 || typeof e.value == "string" && (e.value = f(e.value)), e.__isJson && (e.value = JSON.parse(f(e.value)))), typeof n == "function" ? n(e) : e.value;
+}, y = (r, n, t) => {
   if (!r)
     throw new Error("Missing key!");
   let e;
@@ -56,7 +56,7 @@ const g = () => void localStorage.clear(), i = (r) => {
     __isJson: e
   };
   localStorage.setItem(`${c}${r}`, JSON.stringify(a));
-}, y = (r) => {
+}, d = (r) => {
   if (r === c)
     return;
   const n = [];
@@ -77,6 +77,6 @@ export {
   l as encrypt,
   u as get,
   i as remove,
-  d as set,
-  y as setPrefix
+  y as set,
+  d as setPrefix
 };
